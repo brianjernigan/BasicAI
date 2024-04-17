@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _playerPosition;
 
-    private readonly Vector3 _offset = new(0f, 7.5f, -1f);
+    private readonly Vector3 _offset = new(0f, 10f, -1f);
 
     private void Update()
     {
