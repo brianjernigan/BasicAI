@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour
 
     private float _wanderRadius = 100f;
     private float _wanderTimer = 10f;
-    private float _minDistanceFromLastPoint = 100f;
-    private float _minDistanceFromCurrentPosition = 100f;
+    private float _minDistanceFromLastPoint = 20f;
+    private float _minDistanceFromCurrentPosition = 20f;
     private float _timer;
 
     private Vector3 _previousDestination;
