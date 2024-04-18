@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private NavMeshAgent _nma;
 
     private float _wanderRadius = 100f;
-    private float _wanderTimer = 10f;
+    private float _wanderTimer = 5f;
     private float _minDistanceFromLastPoint = 20f;
     private float _minDistanceFromCurrentPosition = 20f;
     private float _timer;
