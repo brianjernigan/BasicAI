@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -20,11 +22,13 @@ public class EnemyController : MonoBehaviour
 
     private EnemyStateHandler _esh;
     private GameObject _player;
+    private Canvas _healthCanvas;
 
     private void Awake()
     {
         _esh = GetComponent<EnemyStateHandler>();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _healthCanvas = GetComponentInChildren<Canvas>();
     }
     
     private void InitializeMovement()
@@ -52,6 +56,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         InitializeMovement();
+        _healthCanvas.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     private void Update()
@@ -67,8 +72,15 @@ public class EnemyController : MonoBehaviour
         }
         
         SetSpeed(_esh.CurrentState);
+        UpdateHealthBarPosition();
     }
-    
+
+    private void UpdateHealthBarPosition()
+    {
+        var offset = new Vector3(0, 2.5f, 0);
+        _healthCanvas.transform.position = transform.position + offset;
+    }
+
     private void UpdateDestination()
     {
         _timer += Time.deltaTime;
