@@ -5,6 +5,7 @@ using System.Security;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
@@ -24,6 +25,11 @@ public class PlayerController : MonoBehaviour
     private bool IsWalking { get; set; }
     private int Health { get; set; } = 4;
 
+    private void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+    
     private void ResetDamageTimer()
     {
         _damageTimer = DamageInterval;
@@ -97,11 +103,22 @@ public class PlayerController : MonoBehaviour
         {
             _lossPanel.SetActive(true);
             _gamePanel.SetActive(false);
+            Time.timeScale = 0;
         }
     }
 
     private void UpdateHealthText(int health)
     {
         _healthText.text = $"Health: {health}";
+    }
+
+    public void OnClickRestartButton()
+    {
+        SceneManager.LoadScene("Level");
+    }
+
+    public void OnClickQuitButton()
+    {
+        Application.Quit();
     }
 }

@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
@@ -53,7 +54,7 @@ public class EnemyController : MonoBehaviour
         {
             case EnemyStateHandler.EnemyState.Chasing:
                 _nma.speed = 2f;
-                _nma.angularSpeed = 160f;
+                _nma.angularSpeed = 200f;
                 break;
             case EnemyStateHandler.EnemyState.Wandering:
                 _nma.speed = 1f;
@@ -104,6 +105,7 @@ public class EnemyController : MonoBehaviour
         {
             _winPanel.SetActive(true);
             _gamePanel.SetActive(false);
+            Time.timeScale = 0;
         }
     }
 
@@ -160,5 +162,15 @@ public class EnemyController : MonoBehaviour
         randomDirection += origin;
         NavMesh.SamplePosition(randomDirection, out var navHit, distance, mask);
         return navHit.position;
+    }
+
+    public void OnClickRestartButton()
+    {
+        SceneManager.LoadScene("Level");
+    }
+
+    public void OnClickQuitButton()
+    {
+        Application.Quit();
     }
 }
