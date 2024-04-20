@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43875018, g: 0.48690814, b: 0.56717706, a: 1}
+  m_IndirectSpecularColor: {r: 0.43874976, g: 0.48690724, b: 0.56717604, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10707,6 +10707,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dd56ac884dfe3c348ae7b089e3ba25e6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1937947606}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dd56ac884dfe3c348ae7b089e3ba25e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937947607}
   m_SourcePrefab: {fileID: 100100000, guid: dd56ac884dfe3c348ae7b089e3ba25e6, type: 3}
 --- !u!1 &1937947600 stripped
 GameObject:
@@ -10803,9 +10806,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 1937947601}
   _rb: {fileID: 1937947602}
-  _healthText: {fileID: 1272305822}
-  _lossPanel: {fileID: 1435936551}
-  _gamePanel: {fileID: 1764835605}
 --- !u!114 &1937947606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10819,6 +10819,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCam: {fileID: 963194227}
+--- !u!114 &1937947607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937947600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba27ffe48eed4f76a2c59c7d16aa7bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthText: {fileID: 1272305822}
+  _lossPanel: {fileID: 1435936551}
+  _gamePanel: {fileID: 1764835605}
 --- !u!1 &2020443740
 GameObject:
   m_ObjectHideFlags: 0
