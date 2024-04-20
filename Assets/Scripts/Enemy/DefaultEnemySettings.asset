@@ -15,6 +15,6 @@ MonoBehaviour:
   wanderSpeed: 1
   wanderAcceleration: 8
   wanderAngularSpeed: 100
-  chaseSpeed: 2
+  chaseSpeed: 2.5
   chaseAcceleration: 12
   chaseAngularSpeed: 200
