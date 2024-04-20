@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43874976, g: 0.48690724, b: 0.56717604, a: 1}
+  m_IndirectSpecularColor: {r: 0.43875018, g: 0.48690814, b: 0.56717706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -380,6 +380,14 @@ PrefabInstance:
       propertyPath: _spottedMat
       value: 
       objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _spottedMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _defaultSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: ec898efca2b3a45889de3ce05f01dfd7, type: 2}
     - target: {fileID: 3712606803041466035, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
       propertyPath: _winPanel
       value: 
@@ -1341,6 +1349,14 @@ PrefabInstance:
       propertyPath: _spottedMat
       value: 
       objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _spottedMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _defaultSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: ec898efca2b3a45889de3ce05f01dfd7, type: 2}
     - target: {fileID: 3712606803041466035, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
       propertyPath: _winPanel
       value: 
@@ -1733,6 +1749,14 @@ PrefabInstance:
       propertyPath: _spottedMat
       value: 
       objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _spottedMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _defaultSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: ec898efca2b3a45889de3ce05f01dfd7, type: 2}
     - target: {fileID: 3712606803041466035, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
       propertyPath: _winPanel
       value: 
@@ -10411,6 +10435,14 @@ PrefabInstance:
       propertyPath: _spottedMat
       value: 
       objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _spottedMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a55e61fa8eda481bab7ec6727f0b50d, type: 2}
+    - target: {fileID: 2112574492525644309, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
+      propertyPath: _defaultSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: ec898efca2b3a45889de3ce05f01dfd7, type: 2}
     - target: {fileID: 3712606803041466035, guid: cd06c5fed1d2a8b45b6a820b9276198d, type: 3}
       propertyPath: _winPanel
       value: 

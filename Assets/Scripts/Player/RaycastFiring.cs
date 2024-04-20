@@ -16,6 +16,7 @@ public class RaycastFiring : MonoBehaviour
     
     private EnemyStateHandler _esh;
     private EnemyHealth _eh;
+    private LineRenderer _lr;
     
     private void Update()
     {
@@ -26,6 +27,7 @@ public class RaycastFiring : MonoBehaviour
         if (!Physics.Raycast(ray, out var hit) || !hit.collider.CompareTag("Enemy")) return;
         _esh = hit.collider.GetComponent<EnemyStateHandler>();
         _eh = hit.collider.GetComponent<EnemyHealth>();
+        _lr = hit.collider.GetComponent<LineRenderer>();
         _eh.TakeDamage();
         _esh.ChangeState(EnemyStateHandler.EnemyState.Chasing);
     }

@@ -33,8 +33,7 @@ public class EnemyNavigation : MonoBehaviour
     private Vector3 _previousDestination;
 
     private EnemyStateHandler _esh;
-
-    [SerializeField] private EnemySettings _es;
+    
     [SerializeField] private GameObject _player;
 
     private void Awake()
@@ -48,25 +47,6 @@ public class EnemyNavigation : MonoBehaviour
         _newDestinationTimer = Random.Range(6, 10);
         _timer = _newDestinationTimer;
         _previousDestination = transform.position;
-    }
-
-    private void SetSpeed(EnemyStateHandler.EnemyState currentState)
-    {
-        switch (currentState)
-        {
-            case EnemyStateHandler.EnemyState.Chasing:
-                _nma.speed = _es.chaseSpeed;
-                _nma.acceleration = _es.chaseAcceleration;
-                _nma.angularSpeed = _es.chaseAngularSpeed;
-                break;
-            case EnemyStateHandler.EnemyState.Wandering:
-                _nma.speed = _es.wanderSpeed;
-                _nma.acceleration = _es.wanderAcceleration;
-                _nma.angularSpeed = _es.wanderAngularSpeed;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(currentState), currentState, null);
-        }
     }
     
     private void Start()
@@ -90,13 +70,11 @@ public class EnemyNavigation : MonoBehaviour
     private void Wander()
     {
         UpdateWanderDestination();
-        SetSpeed(_esh.CurrentState);
     }
 
     private void ChasePlayer()
     {
         _nma.SetDestination(_player.transform.position);
-        SetSpeed(_esh.CurrentState);
     }
 
     private void UpdateWanderDestination()
