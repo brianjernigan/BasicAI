@@ -1,3 +1,11 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: BasicAI
+//Name: Brian Jernigan
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 04/22/2024
+/////////////////////////////////////////////
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,47 +72,39 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (!other.gameObject.CompareTag("Enemy")) return;
+        TakeDamage();
+        ResetDamageTimer();
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (!other.gameObject.CompareTag("Enemy")) return;
+        if (_damageTimer > 0)
+        {
+            _damageTimer -= Time.deltaTime;
+        }
+        else
         {
             TakeDamage();
             ResetDamageTimer();
         }
     }
 
-    private void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            if (_damageTimer > 0)
-            {
-                _damageTimer -= Time.deltaTime;
-            }
-            else
-            {
-                TakeDamage();
-                ResetDamageTimer();
-            }
-        }
-    }
-
     private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            _damageTimer = 0;
-        }
+        if (!other.gameObject.CompareTag("Enemy")) return;
+        _damageTimer = 0;
     }
 
     private void TakeDamage()
     {
         Health = Mathf.Max(--Health, 0);
         UpdateHealthText(Health);
-        if (Health <= 0)
-        {
-            _lossPanel.SetActive(true);
-            _gamePanel.SetActive(false);
-            Time.timeScale = 0;
-        }
+        if (Health > 0) return;
+        _lossPanel.SetActive(true);
+        _gamePanel.SetActive(false);
+        Time.timeScale = 0;
     }
 
     private void UpdateHealthText(int health)
