@@ -20,6 +20,7 @@ public class EnemySight : MonoBehaviour
     private EnemyStateHandler _esh;
 
     [SerializeField] private GameObject _player;
+    [SerializeField] private Material _spottedMat;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class EnemySight : MonoBehaviour
         UpdateLineOfSightRender();
         if (!IsPlayerInSight()) return;
         _esh.ChangeState(EnemyStateHandler.EnemyState.Chasing);
+        _lr.material = _spottedMat;
     }
 
     private bool IsPlayerInSight()
