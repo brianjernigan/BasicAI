@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
@@ -23,6 +26,12 @@ public class EnemyController : MonoBehaviour
     private EnemyStateHandler _esh;
     private GameObject _player;
     private Canvas _healthCanvas;
+    
+    [SerializeField] private Image _healthBar;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _gamePanel;
+
+    private int Health { get; set; } = 6;
 
     private void Awake()
     {
@@ -33,23 +42,25 @@ public class EnemyController : MonoBehaviour
     
     private void InitializeMovement()
     {
-        _newDestinationTimer = Random.Range(8, 13);
+        _newDestinationTimer = Random.Range(6, 10);
         _timer = _newDestinationTimer;
         _previousDestination = transform.position;
     }
 
-    private void SetSpeed(EnemyStateHandler.EnemyState currentState)
+    public void SetSpeed(EnemyStateHandler.EnemyState currentState)
     {
         switch (currentState)
         {
             case EnemyStateHandler.EnemyState.Chasing:
-                _nma.speed = 1.25f;
+                _nma.speed = 2f;
                 _nma.angularSpeed = 160f;
                 break;
             case EnemyStateHandler.EnemyState.Wandering:
                 _nma.speed = 1f;
                 _nma.angularSpeed = 100f;
                 break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(currentState), currentState, null);
         }
     }
     
@@ -71,13 +82,34 @@ public class EnemyController : MonoBehaviour
             _nma.SetDestination(_player.transform.position);
         }
         
-        SetSpeed(_esh.CurrentState);
         UpdateHealthBarPosition();
+    }
+
+    public void TakeDamage()
+    {
+        Health = Mathf.Max(--Health, 0);
+        _healthBar.fillAmount = Health * .167f;
+        if (Health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+
+        CheckForWin();
+    }
+
+    private void CheckForWin()
+    {
+        var activeEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (activeEnemies.Length == 0)
+        {
+            _winPanel.SetActive(true);
+            _gamePanel.SetActive(false);
+        }
     }
 
     private void UpdateHealthBarPosition()
     {
-        var offset = new Vector3(0, 2.5f, 0);
+        var offset = new Vector3(0, 2.1f, 0);
         _healthCanvas.transform.position = transform.position + offset;
     }
 

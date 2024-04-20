@@ -11,22 +11,23 @@ public class EnemySight : MonoBehaviour
     private LineRenderer _lr;
     private GameObject _player;
     private EnemyStateHandler _esh;
+    private EnemyController _ec;
 
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _esh = GetComponent<EnemyStateHandler>();
         _lr = GetComponent<LineRenderer>();
+        _ec = GetComponent<EnemyController>();
         _lr.positionCount = 3;
     }
 
     private void Update()
     {
         UpdateLineOfSightRender();
-        if (IsPlayerInSight())
-        {
-            _esh.ChangeState(EnemyStateHandler.EnemyState.Chasing);
-        }
+        if (!IsPlayerInSight()) return;
+        _esh.ChangeState(EnemyStateHandler.EnemyState.Chasing);
+        _ec.SetSpeed(_esh.CurrentState);
     }
 
     private bool IsPlayerInSight()

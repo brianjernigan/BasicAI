@@ -351,6 +351,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nma: {fileID: 7260829398705692757}
+  _healthBar: {fileID: 6201978452519014517}
+  _winPanel: {fileID: 0}
+  _gamePanel: {fileID: 0}
 --- !u!120 &6985697165480686343
 LineRenderer:
   serializedVersion: 2
