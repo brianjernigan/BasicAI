@@ -13,9 +13,9 @@ using UnityEngine;
 public class RaycastFiring : MonoBehaviour
 {
     [SerializeField] private Camera _mainCam;
-
-    private EnemyController _ec;
+    
     private EnemyStateHandler _esh;
+    private EnemyHealth _eh;
     
     private void Update()
     {
@@ -24,9 +24,9 @@ public class RaycastFiring : MonoBehaviour
         var ray = _mainCam.ScreenPointToRay(Input.mousePosition);
 
         if (!Physics.Raycast(ray, out var hit) || !hit.collider.CompareTag("Enemy")) return;
-        _ec = hit.collider.GetComponent<EnemyController>();
         _esh = hit.collider.GetComponent<EnemyStateHandler>();
-        _ec.TakeDamage();
+        _eh = hit.collider.GetComponent<EnemyHealth>();
+        _eh.TakeDamage();
         _esh.ChangeState(EnemyStateHandler.EnemyState.Chasing);
     }
 }

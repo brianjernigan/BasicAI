@@ -17,16 +17,14 @@ public class EnemySight : MonoBehaviour
     private const float SightDistance = 7.5f;
     
     private LineRenderer _lr;
-    private GameObject _player;
     private EnemyStateHandler _esh;
-    private EnemyController _ec;
+
+    [SerializeField] private GameObject _player;
 
     private void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
         _esh = GetComponent<EnemyStateHandler>();
         _lr = GetComponent<LineRenderer>();
-        _ec = GetComponent<EnemyController>();
         _lr.positionCount = 3;
     }
 
@@ -35,7 +33,6 @@ public class EnemySight : MonoBehaviour
         UpdateLineOfSightRender();
         if (!IsPlayerInSight()) return;
         _esh.ChangeState(EnemyStateHandler.EnemyState.Chasing);
-        _ec.SetSpeed(_esh.CurrentState);
     }
 
     private bool IsPlayerInSight()

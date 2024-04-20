@@ -9,7 +9,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] private GameObject _lossPanel;
     [SerializeField] private GameObject _gamePanel;
     
-    private const float DamageInterval = 2f;
+    private const float DamageInterval = 1.5f;
     private float _damageTimer;
     
     private int Health { get; set; } = 4;
@@ -22,6 +22,7 @@ public class PlayerCollisions : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (!other.gameObject.CompareTag("Enemy")) return;
+        
         TakeDamage();
         ResetDamageTimer();
     }
@@ -29,6 +30,7 @@ public class PlayerCollisions : MonoBehaviour
     private void OnCollisionStay(Collision other)
     {
         if (!other.gameObject.CompareTag("Enemy")) return;
+        
         if (_damageTimer > 0)
         {
             _damageTimer -= Time.deltaTime;
@@ -43,6 +45,7 @@ public class PlayerCollisions : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         if (!other.gameObject.CompareTag("Enemy")) return;
+        
         _damageTimer = 0;
     }
 

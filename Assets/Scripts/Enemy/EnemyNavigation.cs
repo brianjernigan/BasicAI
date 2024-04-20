@@ -19,9 +19,9 @@ using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
-public class EnemyController : MonoBehaviour
+public class EnemyNavigation : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent _nma;
+    private NavMeshAgent _nma;
 
     private const float WanderRadius = 100f;
     private const float MinDistanceFromLastPoint = 15f;
@@ -33,20 +33,14 @@ public class EnemyController : MonoBehaviour
     private Vector3 _previousDestination;
 
     private EnemyStateHandler _esh;
-    private GameObject _player;
-    private Canvas _healthCanvas;
-    
-    [SerializeField] private Image _healthBar;
-    [SerializeField] private GameObject _winPanel;
-    [SerializeField] private GameObject _gamePanel;
 
-    private int Health { get; set; } = 6;
+    [SerializeField] private EnemySettings _es;
+    [SerializeField] private GameObject _player;
 
     private void Awake()
     {
+        _nma = GetComponent<NavMeshAgent>();
         _esh = GetComponent<EnemyStateHandler>();
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _healthCanvas = GetComponentInChildren<Canvas>();
     }
     
     private void InitializeMovement()
@@ -56,17 +50,19 @@ public class EnemyController : MonoBehaviour
         _previousDestination = transform.position;
     }
 
-    public void SetSpeed(EnemyStateHandler.EnemyState currentState)
+    private void SetSpeed(EnemyStateHandler.EnemyState currentState)
     {
         switch (currentState)
         {
             case EnemyStateHandler.EnemyState.Chasing:
-                _nma.speed = 2f;
-                _nma.angularSpeed = 200f;
+                _nma.speed = _es.chaseSpeed;
+                _nma.acceleration = _es.chaseAcceleration;
+                _nma.angularSpeed = _es.chaseAngularSpeed;
                 break;
             case EnemyStateHandler.EnemyState.Wandering:
-                _nma.speed = 1f;
-                _nma.angularSpeed = 100f;
+                _nma.speed = _es.wanderSpeed;
+                _nma.acceleration = _es.wanderAcceleration;
+                _nma.angularSpeed = _es.wanderAngularSpeed;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(currentState), currentState, null);
@@ -76,64 +72,44 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         InitializeMovement();
-        _healthCanvas.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     private void Update()
     {
         if (_esh.CurrentState == EnemyStateHandler.EnemyState.Wandering)
         {
-            UpdateDestination();
+            Wander();
         }
 
         if (_esh.CurrentState == EnemyStateHandler.EnemyState.Chasing)
         {
-            _nma.SetDestination(_player.transform.position);
-        }
-        
-        UpdateHealthBarPosition();
-    }
-
-    public void TakeDamage()
-    {
-        Health = Mathf.Max(--Health, 0);
-        _healthBar.fillAmount = Health * .167f;
-        if (Health <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-
-        CheckForWin();
-    }
-
-    private void CheckForWin()
-    {
-        var activeEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (activeEnemies.Length == 0)
-        {
-            _winPanel.SetActive(true);
-            _gamePanel.SetActive(false);
-            Time.timeScale = 0;
+            ChasePlayer();
         }
     }
 
-    private void UpdateHealthBarPosition()
+    private void Wander()
     {
-        var offset = new Vector3(0, 2.1f, 0);
-        _healthCanvas.transform.position = transform.position + offset;
+        UpdateWanderDestination();
+        SetSpeed(_esh.CurrentState);
     }
 
-    private void UpdateDestination()
+    private void ChasePlayer()
+    {
+        _nma.SetDestination(_player.transform.position);
+        SetSpeed(_esh.CurrentState);
+    }
+
+    private void UpdateWanderDestination()
     {
         _timer += Time.deltaTime;
 
         if (_timer >= _newDestinationTimer)
         {
-            SetNewDestination();
+            SetNewWanderDestination();
         }
     }
 
-    private void SetNewDestination()
+    private void SetNewWanderDestination()
     {
         var newDestination = GetNewDestination();
         _nma.SetDestination(newDestination);
@@ -170,15 +146,5 @@ public class EnemyController : MonoBehaviour
         randomDirection += origin;
         NavMesh.SamplePosition(randomDirection, out var navHit, distance, mask);
         return navHit.position;
-    }
-
-    public void OnClickRestartButton()
-    {
-        SceneManager.LoadScene("Level");
-    }
-
-    public void OnClickQuitButton()
-    {
-        Application.Quit();
     }
 }

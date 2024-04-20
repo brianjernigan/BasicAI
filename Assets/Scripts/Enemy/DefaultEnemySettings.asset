@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2b90f7190a342dd94ab558cb55689e, type: 3}
+  m_Name: DefaultEnemySettings
+  m_EditorClassIdentifier: 
+  wanderSpeed: 1
+  wanderAcceleration: 8
+  wanderAngularSpeed: 100
+  chaseSpeed: 2
+  chaseAcceleration: 12
+  chaseAngularSpeed: 200
